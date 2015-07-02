@@ -43,6 +43,9 @@ FROZENKERNEL=0
 # - OnePlus One
 # git clone https://github.com/binkybear/AK-OnePone.git -b cm-11.0-ak oneplus11
 # git clone https://github.com/binkybear/AK-OnePone.git -b cm-12.1 oneplus12
+# - YU Yureka
+# git clone https://github.com/binkybear/Yureka.git -b cm-11.0 yureka11
+# git clone https://github.com/binkybear/Yureka.git -b cm-12.0 yureka12
 # - Galaxy S5
 # git clone https://github.com/binkybear/KTSGS5.git -b aosp4.4 galaxy_s5
 # git clone https://github.com/binkybear/KTSGS5.git -b tw4.4 galaxy_s5_tw
@@ -69,6 +72,7 @@ source devices/nexus7-flo-deb
 source devices/nexus5-hammerhead
 source devices/nexus4-mako
 source devices/one-bacon
+source devices/yureka-tomato
 
 ######### Set paths and permissions  #######
 
@@ -240,6 +244,31 @@ case $samsungmenuchoice in
 2) d_clear; f_galaxyS4_I9500 ;;
 0) d_clear; f_interface ;;
 *) echo "Incorrect choice..." ;
+esac
+}
+
+f_interface_yureka(){
+echo -e "\e[31m ------------------------- YU Yureka --------------------\e[0m"
+echo ""
+echo "  [1] Build All - Kali rootfs and Kernel (Android 4.4+)"
+echo "  [2] Build Kernel Only (Android 4.4+)"
+echo "  [3] Build All - Kali rootfs and Kernel (Android 5)"
+echo "  [4] Build Kernel Only (Android 5)"
+echo "  [0] Exit to Main Menu"
+echo ""
+echo ""
+# wait for character input
+
+read -p "Choice: " grouper_menuchoice
+
+case $grouper_menuchoice in
+
+1) d_clear; f_rootfs ; f_flashzip ; f_yureka_kernel ; f_zip_save ; f_zip_kernel_save ; f_rom_build ;;
+2) d_clear; f_yureka_kernel ; f_zip_kernel_save ;;
+3) d_clear; f_rootfs ; f_flashzip ; f_yureka_kernel5 ; f_zip_save ; f_zip_kernel_save ; f_rom_build ;;
+4) d_clear; f_yureka_kernel5 ; f_zip_kernel_save ;;
+0) d_clear; f_interface ;;
+*) echo "Incorrect choice... " ;
 esac
 }
 
